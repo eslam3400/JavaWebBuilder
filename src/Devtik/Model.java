@@ -13,7 +13,7 @@ public class Model {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("JDBC:sqlite:db.db");
-            System.out.println("Connected To The DataBase!");
+//            System.out.println("Connected To The DataBase!");
         } catch (Exception e){
             System.out.println("Error "+e.getMessage());
         }
@@ -31,6 +31,53 @@ public class Model {
         }catch (Exception e){
             System.out.println("Error "+e.getMessage());
         }
+    }
+
+    public String auth(String _username,String _password){
+        try{
+            this.stmt = c.createStatement();
+            ResultSet r = stmt.executeQuery("SELECT username FROM users WHERE username = '" +_username+"' AND password = '"+_password+"'");
+            String username = null;
+            while (r.next()){
+                username = r.getString("username");
+            }
+            return username;
+        } catch (Exception e){
+            System.out.println("Error: "+e.getMessage());
+        }
+        return null;
+    }
+
+    public String getContainerStart(){
+        try{
+            this.stmt = c.createStatement();
+            ResultSet r = stmt.executeQuery("SELECT start FROM container");
+            String content = null;
+            while (r.next()){
+                content = r.getString("start");
+            }
+            return content;
+        } catch (Exception e){
+            System.out.println("Error: "+e.getMessage());
+        }
+        return null;
+    }
+
+    public String[] componentData(int _id){
+        try{
+            this.stmt = c.createStatement();
+            ResultSet r = stmt.executeQuery("SELECT * FROM components WHERE id = "+_id);
+            String[] content = new String[3];
+            while (r.next()){
+                content[0] = r.getString("html");
+                content[1] = r.getString("css");
+                content[2] = r.getString("js");
+            }
+            return content;
+        } catch (Exception e){
+            System.out.println("Error: "+e.getMessage());
+        }
+        return null;
     }
 
     public String getHTMLTemplate(int _id){

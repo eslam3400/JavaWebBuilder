@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "username": null,
+      "password": null
+    }
+  ],
+  "components": [
+    {
+      "id": null,
+      "name": null,
+      "html": null,
+      "css": null,
+      "js": null
+    }
+  ]
+}

@@ -6,7 +6,22 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Operations {
+
     Scanner get = new Scanner(System.in);
+
+    public Operations(){
+        System.out.println("please enter the path where u wanna safe the project!");
+        String projectPath = get.nextLine();
+
+        System.out.println("please enter the name of the project");
+        String projectName = get.nextLine();
+        this.createProjectDir(projectPath,projectName);
+
+        System.out.println("please enter the number of template u wanna");
+        int templateNumber = get.nextInt();
+        this.createProjectFiles(projectPath,projectName,templateNumber);
+    }
+
     public void createProjectDir(String projectPath,String projectName){
         File file = new File(projectPath+'\\'+projectName);
         boolean bool = file.mkdir();

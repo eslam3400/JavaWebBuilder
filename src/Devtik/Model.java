@@ -63,15 +63,32 @@ public class Model {
         return null;
     }
 
-    public String[] componentData(int _id){
+    public String getContainerEnd(){
+        try{
+            this.stmt = c.createStatement();
+            ResultSet r = stmt.executeQuery("SELECT end FROM container");
+            String content = null;
+            while (r.next()){
+                content = r.getString("end");
+            }
+            return content;
+        } catch (Exception e){
+            System.out.println("Error: "+e.getMessage());
+        }
+        return null;
+    }
+
+    public String[] getComponentData(int _id){
         try{
             this.stmt = c.createStatement();
             ResultSet r = stmt.executeQuery("SELECT * FROM components WHERE id = "+_id);
-            String[] content = new String[3];
+            String[] content = new String[5];
             while (r.next()){
-                content[0] = r.getString("html");
-                content[1] = r.getString("css");
-                content[2] = r.getString("js");
+                content[0] = r.getString("name");
+                content[1] = r.getString("html");
+                content[2] = r.getString("css");
+                content[3] = r.getString("js");
+                content[4] = r.getString("template");
             }
             return content;
         } catch (Exception e){
